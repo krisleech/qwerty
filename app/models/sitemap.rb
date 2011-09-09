@@ -4,7 +4,17 @@ class Sitemap
       yield(root)
       root.save!
     end
+    # TODO: Create documents for roots children
+    root.children.each do | node |
+     document = node.documents.new
+     document.title = node.name.capitalize
+     document.save!
+    end
     root
+  end
+
+  def cleanup
+    # remove nodes which do not exist
   end
 
   def self.root
