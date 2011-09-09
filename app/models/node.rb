@@ -1,6 +1,6 @@
 class Node < ActiveRecord::Base
-  has_many :documents
-  has_many :settings, :class_name => 'NodeSetting'
+  has_many :documents, :dependent => :destroy
+  has_many :settings, :class_name => 'NodeSetting', :dependent => :destroy
 
   acts_as_nested_set
   acts_as_list :scope => :parent_id
