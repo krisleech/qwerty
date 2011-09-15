@@ -2,7 +2,7 @@ class Node < ActiveRecord::Base
   has_many :documents, :dependent => :destroy
   has_many :settings, :class_name => 'NodeSetting', :dependent => :destroy
 
-  acts_as_nested_set
+  acts_as_nested_set :dependent => :destroy
   acts_as_list :scope => :parent_id
 
   # Add a child node and optionally pass a block which receives the child node

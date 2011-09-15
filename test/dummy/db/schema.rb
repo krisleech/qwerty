@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110909144805) do
+ActiveRecord::Schema.define(:version => 20110915174533) do
 
   create_table "documents", :force => true do |t|
     t.string   "permalink"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20110909144805) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
+    t.integer  "depth",      :default => 0
     t.integer  "position"
     t.integer  "node_id"
     t.datetime "created_at"
@@ -32,9 +33,11 @@ ActiveRecord::Schema.define(:version => 20110909144805) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
+    t.integer  "depth",       :default => 0
     t.integer  "node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "value_klass"
   end
 
   create_table "nodes", :force => true do |t|
@@ -43,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20110909144805) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "position"
+    t.integer  "depth",      :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
