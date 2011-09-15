@@ -51,6 +51,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     multi_json (1.0.3)
+    mysql2 (0.3.7)
     nested_set (1.6.8)
       activerecord (>= 3.0.0)
       railties (>= 3.0.0)
@@ -98,6 +99,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  mysql2
   nested_set
   qwerty!
   sqlite3
