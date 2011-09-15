@@ -5,6 +5,11 @@ class Node < ActiveRecord::Base
   acts_as_nested_set :dependent => :destroy
   acts_as_list :scope => :parent_id
 
+  validates_presence_of :name, :ancestry
+  validates_uniqueness_of :ancestry
+
+  before_validation :set_ancestry
+
   # Add a child node and optionally pass a block which receives the child node
   def add(name, &block)
     new_node = self.children.create!(:name => name.to_s)
@@ -30,5 +35,11 @@ class Node < ActiveRecord::Base
     result[:name] = self.name
     result[:children] = self.children.collect { |c| c.to_hash } unless self.children.empty?
     result
+  end
+
+  private
+
+  def set_ancestry
+    self.ancestry = [self.parent.try(:ancestry), self.name].join('/') if new_record? || parent_id_changed?
   end
 end
