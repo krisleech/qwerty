@@ -10,6 +10,7 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
+gem 'mysql2'
 gem 'nested_set'
 gem 'acts_as_list'
 
