@@ -1,0 +1,2 @@
+module QwertyAdmin::BaseHelper
+end

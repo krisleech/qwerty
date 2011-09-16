@@ -1,0 +1,12 @@
+<li class='node'><%= (node.leaf? ? node.name.pluralize : node.name).capitalize %>
+<span>
+  <%= link_to 'Add', add_qwerty_admin_node_path(node) %>
+  <%= link_to 'Edit', edit_qwerty_admin_node_path(node) %>
+  <%= link_to 'Delete', qwerty_admin_node_path(node), :method => :delete, :confirm => 'Are you sure?' %>
+</span>
+<% unless node.leaf? %>
+  <ol class="nodes">
+    <%= render :partial => node.children %>
+  </ol>
+<% end %>
+</li>
