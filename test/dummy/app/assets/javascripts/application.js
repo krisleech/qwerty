@@ -4,6 +4,5 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require jquery
-//= require jquery_ujs
+//= javascript_include_tag 'ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js', :defer => true, :async => true 
 //= require_tree .
