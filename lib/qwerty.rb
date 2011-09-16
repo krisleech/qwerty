@@ -1,5 +1,6 @@
 require "qwerty/engine"
-require "qwerty/default_auth"
+require "qwerty/allow_auth"
+require "qwerty/deny_auth"
 
 module Qwerty
   class << self
