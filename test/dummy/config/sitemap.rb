@@ -18,5 +18,19 @@ Sitemap.build do | root |
       banner.set(:sort => :random)
       banner.set(:pagination => :off)
     end
+
+    home.add(:links) do | link |
+      link.set(:sort => 'title asc')
+      link.set(:pagination => :off)
+    end
+  end
+
+  root.add(:gallery) do | gallery |
+    gallery.add(:gallery) do | gallery |
+      gallery.add(:picture) do | picture |
+        picture.set(:sort => 'published_at asc')
+        picture.set(:pagination => :off)
+      end
+    end
   end
 end
