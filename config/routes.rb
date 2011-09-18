@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   resources :documents
 
   namespace :qwerty_admin do
-    resources :nodes 
+    resources :nodes do
+      member do
+        get :up
+        get :down
+      end
+    end
   end
 end

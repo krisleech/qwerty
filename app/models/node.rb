@@ -5,6 +5,8 @@ class Node < ActiveRecord::Base
   acts_as_nested_set :dependent => :destroy
   acts_as_list :scope => :parent_id
 
+  default_scope :order => 'position ASC'
+
   validates_presence_of :name, :ancestry
   validates_uniqueness_of :ancestry
   validates_uniqueness_of :name, :scope => :parent_id
