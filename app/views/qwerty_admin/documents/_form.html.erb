@@ -1,0 +1,14 @@
+<%= form.semantic_errors %>
+
+<%= form.inputs do %>
+  <%= form.input :title %>
+<% end %>
+
+  <%= form.hidden_field :parent_id%>
+  <%= form.hidden_field :node_id%>
+
+<%= form.buttons do %>
+  <%= form.commit_button :button_html => { :disable_with => 'Please wait...' } %>
+<% end %>
+
+<%= link_to 'Back', [:qwerty_admin, :nodes] %>

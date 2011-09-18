@@ -8,5 +8,11 @@ Rails.application.routes.draw do
         get :down
       end
     end
+    resources :documents do
+      member do
+        get :up
+        get :down
+      end
+    end
   end
 end
