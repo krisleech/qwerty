@@ -13,6 +13,10 @@ gemspec
 gem 'mysql2'
 gem 'nested_set'
 gem 'acts_as_list'
+gem 'inherited_resources'
+gem 'formtastic'
+gem 'rails'
+gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug'
