@@ -1,4 +1,6 @@
 class Node < ActiveRecord::Base
+  include Sugar 
+
   has_many :documents, :dependent => :destroy
   has_many :settings, :class_name => 'NodeSetting', :dependent => :destroy
 

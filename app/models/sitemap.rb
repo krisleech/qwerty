@@ -13,11 +13,11 @@ class Sitemap
     root
   end
 
-  def destroy!
+  def self.destroy!
     Node.root.try(:destroy)
   end
 
-  def cleanup
+  def self.cleanup
     # remove nodes which do not exist
   end
 

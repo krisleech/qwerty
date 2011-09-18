@@ -8,7 +8,7 @@
     <% when 'sort' %>
       <%= setting.input :value, :label => setting.object.key, :as => :select, :collection => [['Published Date', 'published_at desc'], ['Title', 'title asc']] %>
     <% when 'per_page' %>
-      <%= setting.input :value, :label => 'Per page' unless settings.get('pagination') == 'off' %>
+      <%= setting.input :value, :label => 'Per page' unless setting.object.value == Node::PerPageOff %>
     <% else %>
       <%= setting.input :value, :label => setting.object.key %>
     <% end %>
