@@ -13,6 +13,8 @@ class Node < ActiveRecord::Base
 
   before_validation :set_ancestry
 
+  accepts_nested_attributes_for :settings, :allow_destroy => true
+
   # Add a child node and optionally pass a block which receives the child node
   def add(name, &block)
     new_node = self.children.create!(:name => name.to_s)

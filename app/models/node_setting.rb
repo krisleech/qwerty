@@ -6,6 +6,7 @@ class NodeSetting < ActiveRecord::Base
   # validates_uniqueness_of :key, :scope => :parent_id
 
   TypecastableClasses = %w(Symbol String DateTime Float Fixnum Bignum Date Time)
+  PerPageOff = 10000
 
   def value=(_value)
     self.value_klass = _value.class.to_s
