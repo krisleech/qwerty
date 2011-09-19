@@ -21,6 +21,8 @@ gem 'faker'
 gem 'sanitize'
 gem 'dragonfly'
 gem 'rack-cache', :require => 'rack/cache'
+gem 'ckeditor'
+gem 'paperclip' # used by ckeditor
 
 # To use debugger
 # gem 'ruby-debug'

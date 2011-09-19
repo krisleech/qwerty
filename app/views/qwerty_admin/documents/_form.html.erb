@@ -2,7 +2,7 @@
 
 <%= form.inputs do %>
   <%= form.input :title %>
-  <%= form.input :body %>
+  <%= form.input :body, :as => :ckeditor , :input_html => { :cols => 5 }%>
   <%= form.input :summary, :hint => 'Can not contain HTML' %>
   <%= form.input :url, :as => :url %>
   <%= form.input :published %>
