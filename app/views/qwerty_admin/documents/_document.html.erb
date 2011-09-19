@@ -6,6 +6,11 @@
       <% unless document.published? %>
         <span class="label">Draft</span> 
       <% end %>
+
+      <% if document.image %>
+        <div class='image'><%= image_tag document.image.thumb('50x50').png.url %></div>
+      <% end %>
+
       <%= to_html truncate(document.summary, :length => 100) %>
 
     </div>

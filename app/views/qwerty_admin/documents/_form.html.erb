@@ -4,8 +4,10 @@
   <%= form.input :title %>
   <%= form.input :body %>
   <%= form.input :summary, :hint => 'Can not contain HTML' %>
-  <%= form.input :url %>
+  <%= form.input :url, :as => :url %>
   <%= form.input :published %>
+  <%= form.input :image, :as => :file %>
+  <%= form.input :remove_image, :as => :boolean %>
 <% end %>
 
   <%= form.hidden_field :parent_id%>

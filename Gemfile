@@ -19,6 +19,8 @@ gem 'rails'
 gem 'jquery-rails'
 gem 'faker'
 gem 'sanitize'
+gem 'dragonfly'
+gem 'rack-cache', :require => 'rack/cache'
 
 # To use debugger
 # gem 'ruby-debug'

@@ -1,5 +1,9 @@
 <h2><%= link_to @document.title, [:qwerty_admin, @document] %></h2>
 
+<% if @document.image %>
+<%= image_tag @document.image.thumb('100x100').png.url %>
+<% end %>
+
 <% if @document.node.leaf? %>
   <%= @document.body.try(:html_safe) %>
 <% else %>

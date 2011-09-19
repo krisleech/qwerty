@@ -42,6 +42,8 @@ GEM
     arel (2.2.1)
     bcrypt-ruby (3.0.0)
     builder (3.0.0)
+    dragonfly (0.9.8)
+      rack
     erubis (2.7.0)
     faker (1.0.0)
       i18n (~> 0.4)
@@ -116,6 +118,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  dragonfly
   faker
   formtastic
   inherited_resources
@@ -123,6 +126,7 @@ DEPENDENCIES
   mysql2
   nested_set
   qwerty!
+  rack-cache
   rails
   sanitize
   sqlite3

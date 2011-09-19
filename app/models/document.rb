@@ -7,6 +7,8 @@ class Document < ActiveRecord::Base
   acts_as_nested_set :dependent => :destroy
   acts_as_list :scope => [ :parent_id, :node_id ]
 
+  image_accessor :image
+
   default_scope :order => 'position ASC'
   
   scope :by_node, lambda { |node| where(:node_id => node.id) }
