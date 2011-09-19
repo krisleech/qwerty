@@ -2,10 +2,11 @@ class NodeSetting < ActiveRecord::Base
   belongs_to :node
   acts_as_nested_set
 
-  validates_presence_of :key, :value, :value_klass
-  # validates_uniqueness_of :key, :scope => :parent_id
+  validates_presence_of :key, :value_klass
+  validates_presence_of :value, :unless => proc { |ns| ns.read_attribute(:value) == 'false' } # Regular validation fails for false
+  validates_uniqueness_of :key, :scope => :node_id
 
-  TypecastableClasses = %w(Symbol String DateTime Float Fixnum Bignum Date Time)
+  TypecastableClasses = %w(TrueClass FalseClass Symbol String DateTime Float Fixnum Bignum Date Time)
   PerPageOff = 10000
 
   def value=(_value)
@@ -36,6 +37,10 @@ class NodeSetting < ActiveRecord::Base
       _value.to_i
     when 'Bignum'
       _value.to_i
+    when 'TrueClass'
+      _value == 'true'
+    when 'FalseClass'
+      _value == 'true'
     else
       Marshal.load(_value)
     end
