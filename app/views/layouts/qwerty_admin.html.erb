@@ -59,14 +59,16 @@
         </div>
       </div>
       <div class="content">
-        <!-- Main hero unit for a primary marketing message or call to action -->
-        <div> 
-          <%= yield %>
+        <div class='row'>
+          <div class='span16'>
+            <%= yield %>
+          </div>
         </div>
-        <footer>
-          <p>Powered by <%= link_to 'Qwerty', 'https://github.com/krisleech/qwerty'%> <%= Qwerty::VERSION %></p>
-        </footer>
       </div>
+      <footer>
+      <p>Powered by <%= link_to 'Qwerty', 'https://github.com/krisleech/qwerty'%> <%= Qwerty::VERSION %></p>
+      </footer>
     </div>
-  </body>
+  </div>
+</body>
 </html>

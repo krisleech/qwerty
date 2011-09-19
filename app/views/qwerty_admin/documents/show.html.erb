@@ -1,6 +1,6 @@
 <h2><%= link_to @document.title, [:qwerty_admin, @document] %></h2>
 
-<% if @document.leaf? %>
+<% if @document.node.leaf? %>
   <%= @document.body.try(:html_safe) %>
 <% else %>
   <%= to_html @document.summary %>
@@ -13,12 +13,12 @@
 
 <% @document.node.children.each do | node | %>
   <div class='node'>
-    <h3><strong><%= node.name.pluralize.capitalize %></strong></h3>
+    <h3><%= node.name.pluralize.capitalize %></h3>
 
     <% unless @document.leaf? %>
-      <ol class="documents">
+      <div class="documents">
         <%= render :partial => @document.children.by_node(node) %>
-      </ol>
+      </div>
     <% else %>
       <p>No <%= node.name.capitalize.pluralize %> have been added yet.</p>
     <% end %>
