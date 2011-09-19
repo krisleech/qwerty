@@ -7,14 +7,14 @@ class Node
     end
 
     def pagination_off!
-      setting = get(:per_page) || settings.new(:key => 'per_page')
-      setting.value = PerPageOff
-      setting.save!
+      settings.find_or_create_by_key('per_page') { |s| s.value = PerPageOff }
+    end
+
+    def undeletable!
+      settings.find_or_create_by_key('can_delete') { |s| s.value = false }
     end
 
     module ClassMethods
     end
-
-    private
   end
 end

@@ -1,6 +1,10 @@
 Sitemap.build do | root |
+  root.undeletable!
 
   root.add(:home) do | home |
+
+    home.undeletable!
+
     home.add(:banner) do | banner |
       banner.set(:sort => :random)
       banner.set(:pagination => :off)

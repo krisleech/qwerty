@@ -62,17 +62,11 @@
         <!-- Main hero unit for a primary marketing message or call to action -->
         <div> 
           <%= yield %>
-          <p><a class="btn primary large">Learn more &raquo;</a></p>
-
         </div>
-
-
         <footer>
-        <p>&copy; Company 2011</p>
-
+          <p>Powered by <%= link_to 'Qwerty', 'https://github.com/krisleech/qwerty'%> <%= Qwerty::VERSION %></p>
         </footer>
       </div>
     </div>
-
   </body>
 </html>

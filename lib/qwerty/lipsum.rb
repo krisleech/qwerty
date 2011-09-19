@@ -20,6 +20,7 @@ module Qwerty
           doc = node.documents.new
           doc.title = node.depth == 1 ? node.name.capitalize : Faker::Lorem.words(rand(5)+1).join(' ').capitalize
           doc.body = Faker::Lorem.paragraphs(rand(20)+1).collect { |p| "<p>#{p}</p>"}.join("\n")
+          doc.published = true
           doc.parent = parent_document
           doc.save!
           self.class.new(node.children, @options.merge({:parent_document => doc})).run!

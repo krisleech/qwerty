@@ -1,0 +1,30 @@
+<h2><%= link_to @document.title, [:qwerty_admin, @document] %></h2>
+
+<% if @document.leaf? %>
+  <%= @document.body.try(:html_safe) %>
+<% else %>
+  <%= to_html @document.summary %>
+<% end %>
+
+<p>
+  <%= link_to 'Edit', edit_qwerty_admin_document_path(@document), :class => 'btn small' %>
+  <%= link_to 'Delete', qwerty_admin_document_path(@document), :method => :delete, :confirm => 'Are you sure?', :class => 'btn small danger' unless @document.get(:can_delete) == false %>
+</p>
+
+<% @document.node.children.each do | node | %>
+  <div class='node'>
+    <h3><strong><%= node.name.pluralize.capitalize %></strong></h3>
+
+    <% unless @document.leaf? %>
+      <ol class="documents">
+        <%= render :partial => @document.children.by_node(node) %>
+      </ol>
+    <% else %>
+      <p>No <%= node.name.capitalize.pluralize %> have been added yet.</p>
+    <% end %>
+    <p>
+    <%= link_to "Add #{node.name.capitalize}", new_qwerty_admin_document_path(:parent_id => @document.id, :node_id => node.id), :class => 'btn primary' %>
+    </p>
+  </div>
+<% end %>
+

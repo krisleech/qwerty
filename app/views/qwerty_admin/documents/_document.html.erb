@@ -1,9 +1,12 @@
-<li class='document'><%= document.title %>
+<li class='document'><%= link_to document.title, [:qwerty_admin, document] %>
+<% unless document.published? %>
+  <span class="label">Draft</span> 
+<% end %>
+
 <span>
-  <%= link_to 'Up', up_qwerty_admin_document_path(document), :class => 'btn small' %>
-  <%= link_to 'Down', down_qwerty_admin_document_path(document), :class => 'btn small' %>
+  <%= link_to 'Up', up_qwerty_admin_document_path(document), :class => 'btn small' unless document.last? %>
+  <%= link_to 'Down', down_qwerty_admin_document_path(document), :class => 'btn small' unless document.first? %>
   <%= link_to 'Edit', edit_qwerty_admin_document_path(document), :class => 'btn small' %>
-  <%= link_to 'Delete', qwerty_admin_document_path(document), :method => :delete, :confirm => 'Are you sure?', :class => 'btn small danger' %>
 
   <% document.node.children.each do | node | %>
     <p><strong><%= node.name.pluralize.capitalize %></strong></p>
@@ -12,10 +15,11 @@
       <ol class="documents">
         <%= render :partial => document.children.by_node(node) %>
       </ol>
+    <% else %>
+      <p>No <%= node.name.pluralize.capitalize %> yet</p>
     <% end %>
 
     <%= link_to "Add #{node.name.capitalize}", new_qwerty_admin_document_path(:parent_id => document.id, :node_id => node.id), :class => 'btn primary' %>
-    <span class="label">Hidden</span> 
   <% end %>
 </span>
 

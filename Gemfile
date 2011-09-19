@@ -18,6 +18,7 @@ gem 'formtastic'
 gem 'rails'
 gem 'jquery-rails'
 gem 'faker'
+gem 'sanitize'
 
 # To use debugger
 # gem 'ruby-debug'
