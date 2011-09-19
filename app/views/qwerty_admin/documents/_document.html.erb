@@ -4,15 +4,19 @@
   <%= link_to 'Down', down_qwerty_admin_document_path(document) %>
   <%= link_to 'Edit', edit_qwerty_admin_document_path(document) %>
   <%= link_to 'Delete', qwerty_admin_document_path(document), :method => :delete, :confirm => 'Are you sure?' %>
-  <%= document.node_name.capitalize %>
 
   <% document.node.children.each do | node | %>
+    <p><strong><%= node.name.pluralize.capitalize %></strong></p>
+
+    <% unless document.leaf? %>
+      <ol class="documents">
+        <%= render :partial => document.children.by_node(node) %>
+      </ol>
+    <% end %>
+
     <%= link_to "Add #{node.name}", new_qwerty_admin_document_path(:parent_id => document.id, :node_id => node.id) %>
+
   <% end %>
 </span>
-<% unless document.leaf? %>
-  <ol class="documents">
-    <%= render :partial => document.children %>
-  </ol>
-<% end %>
+
 </li>

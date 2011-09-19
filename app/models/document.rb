@@ -6,6 +6,8 @@ class Document < ActiveRecord::Base
   acts_as_list :scope => :parent_id
 
   default_scope :order => 'position ASC'
+  
+  scope :by_node, lambda { |node| where(:node_id => node.id) }
 
   def node_name
     node.name
