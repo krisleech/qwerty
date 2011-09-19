@@ -10,7 +10,7 @@ class Node
       settings.find_or_create_by_key('per_page') { |s| s.value = PerPageOff }
     end
 
-    def undeletable!
+    def undeleteable!
       settings.find_or_create_by_key('can_delete') { |s| s.value = false }
     end
 
