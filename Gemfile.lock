@@ -43,6 +43,8 @@ GEM
     bcrypt-ruby (3.0.0)
     builder (3.0.0)
     erubis (2.7.0)
+    faker (1.0.0)
+      i18n (~> 0.4)
     formtastic (1.2.4)
       actionpack (>= 2.3.7)
       activesupport (>= 2.3.7)
@@ -111,6 +113,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_list
+  faker
   formtastic
   inherited_resources
   jquery-rails

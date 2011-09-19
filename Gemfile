@@ -17,6 +17,7 @@ gem 'inherited_resources'
 gem 'formtastic'
 gem 'rails'
 gem 'jquery-rails'
+gem 'faker'
 
 # To use debugger
 # gem 'ruby-debug'

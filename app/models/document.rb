@@ -6,4 +6,8 @@ class Document < ActiveRecord::Base
   acts_as_list :scope => :parent_id
 
   default_scope :order => 'position ASC'
+
+  def node_name
+    node.name
+  end
 end
