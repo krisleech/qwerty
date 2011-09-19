@@ -17,6 +17,7 @@ Sitemap.build do | root |
 
   root.add(:about) do | about |
     about.undeleteable!
+
     about.add(:page) do | page |
       page.set(:per_page => 10)
       page.set(:sort => 'title asc')
@@ -25,6 +26,7 @@ Sitemap.build do | root |
 
   root.add(:blog) do | blog |
     blog.undeleteable!
+
     blog.add(:post) do | post |
       post.set(:per_page => 10)
       post.set(:sort => 'published_at asc')
@@ -33,6 +35,7 @@ Sitemap.build do | root |
 
   root.add(:gallery) do | gallery |
     gallery.undeleteable!
+
     gallery.add(:gallery) do | gallery |
       gallery.add(:picture) do | picture |
         picture.set(:sort => 'published_at asc')
