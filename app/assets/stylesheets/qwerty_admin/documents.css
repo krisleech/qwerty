@@ -1,4 +1,2 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+ol#documents ol.document { padding: 25px; }
+ol#documents ol.documents li.document { margin-top: 15px; margin-bottom: 15px; }
