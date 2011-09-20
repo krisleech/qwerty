@@ -34,16 +34,20 @@ ActiveRecord::Schema.define(:version => 20110919190859) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth",      :default => 0
-    t.integer  "position",   :default => 0
+    t.integer  "depth",            :default => 0
+    t.integer  "position",         :default => 0
     t.integer  "node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "published",  :default => false
+    t.text     "summary"
+    t.boolean  "published",        :default => false
     t.string   "url"
     t.string   "image_uid"
     t.string   "image_name"
-    t.text     "summary"
+    t.date     "published_at"
+    t.string   "meta_title"
+    t.string   "meta_description"
+    t.string   "meta_keywords"
   end
 
   create_table "node_settings", :force => true do |t|

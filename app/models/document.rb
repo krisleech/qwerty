@@ -3,6 +3,7 @@ class Document < ActiveRecord::Base
   has_many :settings, :through => :node, :class_name => 'NodeSetting'
 
   validates_presence_of :title
+  validates_presence_of :published_at, :if => proc { |d| d.published? }
 
   acts_as_nested_set :dependent => :destroy
   acts_as_list :scope => [ :parent_id, :node_id ]
@@ -13,7 +14,8 @@ class Document < ActiveRecord::Base
   
   scope :by_node, lambda { |node| where(:node_id => node.id) }
 
-  before_save :set_summary
+  before_save :set_summary, :set_meta_fields
+  before_validation :set_published_at
 
   delegate :get, :to => :node
 
@@ -25,5 +27,14 @@ class Document < ActiveRecord::Base
 
   def set_summary
     self.summary = Sanitize.clean(self.body.to(400)) if self.summary.blank? && !self.body.blank?
+  end
+
+  def set_published_at
+    self.published_at = Date.today if published? && published_at.blank?
+  end
+
+  def set_meta_fields
+    self.meta_title = title if published? && meta_title.blank?
+    self.meta_description = summary if published? && meta_description.blank?
   end
 end

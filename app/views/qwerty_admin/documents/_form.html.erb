@@ -6,9 +6,15 @@
   <%= form.input :summary, :hint => 'Can not contain HTML' %>
   <%= form.input :url, :as => :url %>
   <%= form.input :published %>
+  <%= form.input :published_at, :as => :date, :include_blank => true, :value => Time.now, :labels => { :year => 'Y', :month => 'M', :day => 'D' }, :order => [:day, :month, :year], :hint => form.object.published_at.blank? ? 'Leave blank to use today' : '' %>
   <%= form.input :image, :as => :file %>
   <%= form.input :remove_image, :as => :boolean %>
 <% end %>
+
+ <%= form.inputs :name => "Advanced Options", :id => "advanced" do %>
+  <%= form.input :meta_title, :hint => form.object.meta_title.blank? ? 'This will be set automatically if left blank' : '' %>
+  <%= form.input :meta_description, :hint => form.object.meta_title.blank? ? 'This will be set automatically if left blank' : '' %>
+ <% end %>
 
   <%= form.hidden_field :parent_id%>
   <%= form.hidden_field :node_id%>
