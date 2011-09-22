@@ -12,9 +12,13 @@
   <%= form.input :image_alt, :label => 'Image description' %>
 <% end %>
 
- <%= form.inputs :name => "Advanced Options", :id => "advanced" do %>
+ <%= form.inputs :name => "SEO", :id => "advanced" do %>
   <%= form.input :meta_title, :hint => form.object.meta_title.blank? ? 'This will be set automatically if left blank' : '' %>
   <%= form.input :meta_description, :hint => form.object.meta_title.blank? ? 'This will be set automatically if left blank' : '' %>
+ <% end %>
+
+ <%= form.inputs :name => "Advanced Options", :id => "advanced" do %>
+  <%= form.input :template %>
  <% end %>
 
   <%= form.hidden_field :parent_id%>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110922113655) do
+ActiveRecord::Schema.define(:version => 20110922185424) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20110922113655) do
     t.string   "meta_description"
     t.string   "meta_keywords"
     t.string   "image_alt"
+    t.string   "template"
   end
 
   create_table "node_settings", :force => true do |t|
