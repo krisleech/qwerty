@@ -8,7 +8,8 @@
   <%= form.input :published %>
   <%= form.input :published_at, :as => :date, :include_blank => true, :value => Time.now, :labels => { :year => 'Y', :month => 'M', :day => 'D' }, :order => [:day, :month, :year], :hint => form.object.published_at.blank? ? 'Leave blank to use today' : '' %>
   <%= form.input :image, :as => :file %>
-  <%= form.input :remove_image, :as => :boolean %>
+  <%= form.input :remove_image, :as => :boolean if form.object.image %>
+  <%= form.input :image_alt, :label => 'Image description' %>
 <% end %>
 
  <%= form.inputs :name => "Advanced Options", :id => "advanced" do %>

@@ -4,4 +4,8 @@ module DocumentsHelper
     return '' if text.blank?
     text.split("\n").collect { |p| "<p>#{p}</p>"}.join("\n").html_safe
   end
+
+  def document_path(document)
+    document.permalink
+  end
 end

@@ -1,5 +1,9 @@
 class DocumentsController < QwertyBaseController
   def index
-    render :text => 'Hello World!'
+    @documents = Document.public
+  end
+
+  def show
+    @document = Document.public.find_by_permalink!(request.path)
   end
 end

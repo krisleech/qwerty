@@ -4,6 +4,7 @@ class Document < ActiveRecord::Base
 
   validates_presence_of :title
   validates_presence_of :published_at, :if => proc { |d| d.published? }
+  validates_uniqueness_of :permalink
 
   acts_as_nested_set :dependent => :destroy
   acts_as_list :scope => [ :parent_id, :node_id ]
@@ -13,14 +14,19 @@ class Document < ActiveRecord::Base
   default_scope :order => 'position ASC'
   
   scope :by_node, lambda { |node| where(:node_id => node.id) }
+  scope :public, where(:published => true)
 
   before_save :set_summary, :set_meta_fields
-  before_validation :set_published_at
+  before_validation :set_published_at, :set_permalink
 
   delegate :get, :to => :node
 
   def node_name
     node.name
+  end
+  
+  def image?
+    !image.nil?
   end
 
   private
@@ -36,5 +42,9 @@ class Document < ActiveRecord::Base
   def set_meta_fields
     self.meta_title = title if published? && meta_title.blank?
     self.meta_description = summary if published? && meta_description.blank?
+  end
+
+  def set_permalink
+    self.permalink = [ (self.root? ? '' : parent.permalink), self.title.parameterize('_') ].join('/') unless self.title.blank?
   end
 end
