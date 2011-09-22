@@ -4,6 +4,7 @@ class DocumentsController < QwertyBaseController
   end
 
   def show
-    @document = Document.public.find_by_permalink!(request.path)
+    path = request.path == '/' ? '/home' : request.path
+    @document = Document.public.find_by_permalink!(path)
   end
 end
