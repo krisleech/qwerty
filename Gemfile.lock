@@ -3,8 +3,16 @@ PATH
   specs:
     qwerty (0.0.1)
       acts_as_list
+      ckeditor
+      dragonfly
+      faker
+      formtastic
+      inherited_resources
+      jquery-rails
       nested_set
+      paperclip
       rails (~> 3.1.0)
+      sanitize
 
 GEM
   remote: http://rubygems.org/

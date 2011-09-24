@@ -18,7 +18,7 @@ module Qwerty
 
     # Allow for easier settings of multiple options in an initalizer
     # Qwerty.configure do | config |
-    #   config.admin_title = 'Administration'
+    #   config.options[:admin_title] = 'Administration'
     # end
     def configure
       yield(self) if block_given?

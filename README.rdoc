@@ -1,3 +1,11 @@
 = Qwerty
 
 This project rocks and uses MIT-LICENSE.
+
+gem 'qwerty'
+rake qwerty_engine:install:migrations
+
+todo:
+rake qwerty_engine:install
+  - create sample sitemp.rb
+  - copy across views

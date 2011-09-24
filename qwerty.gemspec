@@ -19,6 +19,16 @@ Gem::Specification.new do |s|
   s.add_dependency "rails", "~> 3.1.0"
   s.add_dependency "nested_set"
   s.add_dependency "acts_as_list"
+  s.add_dependency "inherited_resources"
+  s.add_dependency "formtastic"
+  s.add_dependency "jquery-rails"
+  s.add_dependency "sanitize"
+  s.add_dependency "dragonfly"
+  # s.add_dependency "rack-cache", :require => 'rack/cache'
+  s.add_dependency "ckeditor"
+  s.add_dependency "paperclip"
+  s.add_dependency "faker"
+  
   # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
