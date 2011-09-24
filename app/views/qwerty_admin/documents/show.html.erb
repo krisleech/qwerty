@@ -1,4 +1,4 @@
-<h2><%= link_to @document.title, [:qwerty_admin, @document] %></h2>
+<h2><%= link_to @document.title, @document, :target => '_blank' %></h2>
 
 <% if @document.image %>
 <%= image_tag @document.image.thumb('100x100').png.url %>
@@ -12,6 +12,7 @@
 
 <p>
   <%= link_to 'Edit', edit_qwerty_admin_document_path(@document), :class => 'btn small' %>
+  <%= link_to 'Live', document_path(@document), :target => '_blank', :class => 'btn small' %>
   <%= link_to 'Delete', qwerty_admin_document_path(@document), :method => :delete, :confirm => 'Are you sure?', :class => 'btn small danger' unless @document.get(:can_delete) == false %>
 </p>
 

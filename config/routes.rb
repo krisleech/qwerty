@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :documents
+  resources :documents, :only => [:show, :index]
+
+  root :to => 'documents#show'
 
   namespace :qwerty_admin do
     root :to => 'documents#index'
@@ -18,4 +20,7 @@ Rails.application.routes.draw do
       end
     end
   end
+
+
+  match '*permalink' => 'documents#show'
 end
