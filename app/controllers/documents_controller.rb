@@ -16,6 +16,8 @@ class DocumentsController < QwertyBaseController
 
   # TODO: move this in a class in lib, path_prefix should be setable in
   # Qwerty.options
+  # Use Pathname class:
+  # http://ruby-doc.org/stdlib/libdoc/pathname/rdoc/index.html
   
   def locate_template(document)
     view_prefix = 'cms'
