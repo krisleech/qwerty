@@ -12,7 +12,8 @@ module Qwerty
     def options
       @options ||= {
         :admin_title => 'Qwerty CMS',
-        :autherization => Qwerty::AllowAuth
+        :autherization => Qwerty::AllowAuth,
+        :admin_autherization => Qwerty::AllowAuth
       }
     end
 
