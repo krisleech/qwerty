@@ -30,6 +30,6 @@ class QwertyAdmin::DocumentsController < QwertyAdmin::BaseController
   private
 
   def default_redirect
-    qwerty_admin_documents_path
+    resource.root? ? qwerty_admin_documents_path : qwerty_admin_document_path(resource.parent)
   end
 end
