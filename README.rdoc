@@ -1,11 +1,13 @@
 = Qwerty
 
-This project rocks and uses MIT-LICENSE.
-
 gem 'qwerty'
 rake qwerty_engine:install:migrations
+rails generate ckeditor:install
 
 todo:
 rake qwerty_engine:install
   - create sample sitemp.rb
   - copy across views
+
+
+This project rocks and uses MIT-LICENSE.
