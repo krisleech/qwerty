@@ -22,7 +22,7 @@ module Qwerty
           doc.body = Faker::Lorem.paragraphs(rand(20)+1).collect { |p| "<p>#{p}</p>"}.join("\n")
           doc.published = true
           doc.parent = parent_document
-          doc.save!
+          doc.save
           self.class.new(node.children, @options.merge({:parent_document => doc})).run!
         end
       end

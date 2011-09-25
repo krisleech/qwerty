@@ -9,7 +9,7 @@ SimpleForm.setup do |config|
     end
   end
 
-  config.browser_validations = false
+  config.browser_validations = true
   config.button_class = 'btn'
 end
 
