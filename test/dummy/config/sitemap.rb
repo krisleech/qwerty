@@ -7,10 +7,14 @@ Sitemap.build do | root |
     home.add(:banner) do | banner |
       banner.set(:sort => :random)
       banner.set(:pagination => :off)
+      banner.fields(:only => %w(title url image))
+      banner.fieldsets(:except => %w(meta advanced))
     end
 
     home.add(:link) do | link |
       link.set(:sort => 'title asc')
+      link.fields(:only => %w(title url image))
+      link.fieldsets(:except => %w(meta advanced))
       link.pagination_off!
     end
   end
