@@ -1,3 +1,16 @@
 = Qwerty
 
+gem 'qwerty'
+rake qwerty_engine:install:migrations
+rails generate ckeditor:install
+
+todo:
+rake qwerty_engine:install
+  - create sample sitemap.rb
+  - copy across views
+
+Developer Notes
+
+Vim users: To allow rails.vim to detect this is as a Rails project "touch config/environment.rb", which has already been added to .gitignore.
+
 This project rocks and uses MIT-LICENSE.

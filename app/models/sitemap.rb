@@ -4,7 +4,7 @@ class Sitemap
       yield(root)
       root.save!
     end
-    # TODO: Create documents for roots children
+
     root.children.each do | node |
      document = node.documents.new
      document.title = node.name.capitalize
@@ -13,7 +13,11 @@ class Sitemap
     root
   end
 
-  def cleanup
+  def self.destroy!
+    Node.root.try(:destroy)
+  end
+
+  def self.cleanup
     # remove nodes which do not exist
   end
 
@@ -26,7 +30,7 @@ class Sitemap
   end
 
   def self.load_from_disk!
-    Node.root.try(:destroy)
+    destroy!
     load "#{Rails.root}/config/sitemap.rb"
   end
 end

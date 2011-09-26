@@ -8,7 +8,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.integer :lft
       t.integer :rgt
       t.integer :depth, :default => 0
-      t.integer :position
+      t.integer :position, :default => 0
       t.integer :node_id
       t.timestamps
     end

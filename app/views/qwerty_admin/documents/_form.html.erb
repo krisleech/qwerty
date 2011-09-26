@@ -1,0 +1,42 @@
+<%= form.error_notification %>
+
+<% fields = (form.object.get(:include_fields) || %w(title body summary published published_at image meta_fields template)) - (form.object.get(:exclude_fields) || []) %>
+<% fieldsets = (form.object.get(:include_fieldsets) || %w(meta advanced)) - (form.object.get(:exclude_fieldsets) || []) %>
+
+<div class='inputs'>
+  <fieldset>
+    <%= form.input :title if fields.include?('title') %>
+    <%= form.input :body, :as => :ckeditor , :input_html => { :cols => 5 } if fields.include?('body') %>
+    <%= form.input :summary, :hint => 'Plain text only, automatically set if left blank', :input_html => { :rows => 5, :class => 'span14'} if fields.include?('summary') %>
+    <%= form.input :url, :as => :url if fields.include?('url') %>
+    <%= form.input :published if fields.include?('published') %>
+    <%= form.input :published_at, :as => :date, :include_blank => true, :value => Time.now, :order => [:day, :month, :year], :input_html => { :class => 'span2'}, :hint => form.object.published_at.blank? ? 'Leave blank to use today' : '' if fields.include?('published_at') %>
+    <%= form.input :image, :as => :file if fields.include?('image') %>
+    <%= form.input :remove_image, :as => :boolean if form.object.image && fields.include?('image') %>
+    <%= form.input :image_alt, :label => 'Image Description' if fields.include?('image') %>
+  </fieldset>
+
+  <% if fieldsets.include?('meta') %>
+  <fieldset>
+    <legend>SEO</legend>
+    <%= form.input :meta_title, :hint => form.object.meta_title.blank? ? 'This will be set automatically if left blank' : '' if fields.include?('meta_fields') %>
+    <%= form.input :meta_description, :hint => form.object.meta_title.blank? ? 'This will be set automatically if left blank' : '' if fields.include?('meta_fields') %>
+  </fieldset>
+<% end %>
+
+  <% if fieldsets.include?('advanced') %>
+  <fieldset>
+    <legend>Advanced</legend>
+    <%= form.input :template if fields.include?('template') %>
+  </fieldset>
+<% end %>
+
+  <%= form.hidden_field :parent_id%>
+  <%= form.hidden_field :node_id%>
+</div>
+
+<div class='actions'>
+  <%= form.button :submit, "Save #{form.object.node.name.capitalize}", :disable_with => 'Please wait...', :class => 'btn primary' %>
+  <%= link_to 'Back', [:qwerty_admin, :documents], :class => 'btn' %>
+</div>
+

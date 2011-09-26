@@ -1,0 +1,28 @@
+<%= form.error_notification %>
+<div class='inputs'>
+  <fieldset>
+
+  <%= form.input :name %>
+
+  <%= form.simple_fields_for :settings do | setting | %>
+    <% case setting.object.key %>
+    <% when 'sort' %>
+      <%= setting.input :value, :label => setting.object.key, :as => :select, :collection => [['Published Date', 'published_at desc'], ['Title', 'title asc']] %>
+    <% when 'per_page' %>
+      <%= setting.input :value, :label => 'Per page' unless setting.object.value == Node::PerPageOff %>
+    <% when 'can_delete' %>
+      <!-- <%= setting.input :value %> -->
+    <% else %>
+      <%= setting.input :value, :label => setting.object.key.titleize %>
+    <% end %>
+  <% end %>
+
+  <%= form.input :parent_id, :as => :select, :collection => nested_set_options(Node, @node) { |i, level | "#{'--' * level} #{i.name}" }, :include_blank => true, :hint => 'Only change this if you wish to move a category' %>
+</fieldset>
+</div>
+
+<div class='actions'>
+  <%= form.button :submit, :class => 'primary', :disable_with => 'Please wait...' %>
+  <%= link_to 'Back', [:qwerty_admin, :nodes], :class => 'btn' %>
+</div>
+

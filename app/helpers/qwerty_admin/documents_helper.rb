@@ -1,0 +1,2 @@
+module QwertyAdmin::DocumentsHelper
+end

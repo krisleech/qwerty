@@ -1,0 +1,32 @@
+<h2><%= @document.title %></h2>
+
+<% if @document.image? %>
+<div><%= image_tag @document.image.thumb('200x200').png.url, :alt => @document.image_alt %></div>
+<% end %>
+
+<%= @document.body.html_safe %>
+
+<%= @document.published_at %>
+
+<% unless @document.children.empty? %>
+  <% @document.node.children.each do | node | %>
+
+    <h3><%= node.name.pluralize.capitalize %></h3>
+
+    <% unless node.documents.empty? %>
+      <% node.documents.each do | document | %>
+        <div class='document'>
+          <h4><%= link_to document.title, document_path(document) %></h4>
+          <% if document.image? %>
+            <div><%= image_tag document.image.thumb('200x200').png.url, :alt => document.image_alt %></div>
+          <% end %>
+          <%= document.summary %>
+        </div>
+      <% end %>
+    <% else %>
+      <p>No <%= node.name.pluralize %> yet.</p>
+    <% end %>
+
+  <% end %>
+
+<% end %>

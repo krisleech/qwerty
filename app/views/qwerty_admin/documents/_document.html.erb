@@ -1,0 +1,45 @@
+<div class='document'>
+  <div class="row">
+
+    <div class="span6">
+      <%= link_to document.title, [:qwerty_admin, document] %>
+      <% unless document.published? %>
+        <span class="label">Draft</span> 
+      <% end %>
+
+      <% if document.image %>
+        <div class='image'><%= image_tag document.image.thumb('50x50').png.url %></div>
+      <% end %>
+
+      <%= to_html truncate(document.summary, :length => 100) %>
+
+    </div>
+
+    <div class="span4 offset2">
+      <%= link_to image_tag('qwerty/admin/icons/up.png'), up_qwerty_admin_document_path(document), :class => 'btn small' unless document.last? %>
+      <%= link_to image_tag('qwerty/admin/icons/down.png'), down_qwerty_admin_document_path(document), :class => 'btn small' unless document.first? %>
+      <%= link_to 'Edit', edit_qwerty_admin_document_path(document), :class => 'btn small' %>
+      <%= link_to 'Live', document_path(document), :target => '_blank', :class => 'btn small' %>
+    </div>
+  </div>
+
+  <div>
+
+    <% document.node.children.each do | node | %>
+      <!--
+      <p><strong><%= node.name.pluralize.capitalize %></strong></p>
+
+      <% unless document.leaf? %>
+        <div class="documents">
+          <%= render :partial => document.children.by_node(node) %>
+        </div>
+      <% else %>
+        <p>No <%= node.name.pluralize.capitalize %> yet</p>
+      <% end %>
+      -->
+
+      <p><%= link_to "Add #{node.name.capitalize}", new_qwerty_admin_document_path(:parent_id => document.id, :node_id => node.id), :class => 'btn primary' %></p>
+    <% end %>
+
+  </div>
+</div>

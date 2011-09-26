@@ -5,7 +5,7 @@ class CreateNodes < ActiveRecord::Migration
       t.integer :parent_id
       t.integer :lft
       t.integer :rgt
-      t.integer :position
+      t.integer :position, :default => 0
       t.integer :depth, :default => 0
       t.timestamps
     end

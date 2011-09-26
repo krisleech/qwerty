@@ -1,0 +1,5 @@
+<h2>New <%= @document.node.name %></h2>
+
+<%= simple_form_for [:qwerty_admin, @document] do | form | %>
+  <%= render :partial => 'form', :locals => {:form => form }%>
+<% end %>
