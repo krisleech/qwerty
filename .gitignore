@@ -7,3 +7,4 @@ test/dummy/tmp/
 test/dummy/public/ckeditor_assets
 test/dummy/public/system
 .DS_Store
+config/environment.rb
