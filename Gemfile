@@ -10,13 +10,13 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
+gem 'rails'
 gem 'mysql2'
 gem 'nested_set'
 gem 'acts_as_list'
 gem 'inherited_resources'
 # gem 'formtastic'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
-gem 'rails'
 gem 'jquery-rails'
 gem 'faker'
 gem 'sanitize'

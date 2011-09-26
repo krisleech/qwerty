@@ -18,7 +18,7 @@ PATH
       jquery-rails
       nested_set
       paperclip
-      rails (~> 3.1.0)
+      rails (~> 3.0)
       sanitize
       simple_form
 
