@@ -9,7 +9,7 @@ GIT
 PATH
   remote: .
   specs:
-    qwerty (0.0.1)
+    Qwerty (0.0.1.pre)
       acts_as_list
       ckeditor
       dragonfly
@@ -139,6 +139,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  Qwerty!
   acts_as_list
   ckeditor
   dragonfly
@@ -148,7 +149,6 @@ DEPENDENCIES
   mysql2
   nested_set
   paperclip
-  qwerty!
   rack-cache
   rails
   sanitize
