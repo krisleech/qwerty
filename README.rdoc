@@ -1,6 +1,12 @@
 = Qwerty
 
 gem 'qwerty'
+
+For now we also need to add two additional dependancies to your Gemfile, since Gem's can not depend on git repositories only released versions
+
+gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'   
+gem 'ckeditor', :git => 'https://github.com/galetahub/ckeditor' 
+
 rake qwerty_engine:install:migrations
 rails generate ckeditor:install
 
@@ -12,5 +18,15 @@ rake qwerty_engine:install
 Developer Notes
 
 Vim users: To allow rails.vim to detect this is as a Rails project "touch config/environment.rb", which has already been added to .gitignore.
+
+Release Policy
+
+Create release branch from next
+Bump version in Qwerty module: http://semver.org/
+Document release as required
+Merge release branch in to master and next
+Tag master using with 'v' prefix e.g v0.0.1
+Build and push gem to Rubyforge: http://yehudakatz.com/2010/04/02/using-gemspecs-as-intended/
+
 
 This project rocks and uses MIT-LICENSE.
