@@ -1,3 +1,16 @@
+# Dependencies
+require 'nested_set'
+require 'acts_as_list'
+require "inherited_resources"
+require "simple_form"
+require "jquery-rails"
+require "sanitize"
+require "dragonfly"
+require "ckeditor"
+require "paperclip"
+require "faker"
+
+# Qwerty
 require "qwerty/engine"
 require "qwerty/allow_auth"
 require "qwerty/deny_auth"
