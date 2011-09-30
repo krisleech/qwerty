@@ -2,13 +2,11 @@
 
 gem 'qwerty'
 
-For now we also need to add two additional dependancies to your Gemfile, since Gem's can not depend on git repositories only released versions
+For now we also need to add an additional dependancy to your Gemfile, since Gem's can not depend on git repositories only released versions
 
 gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'   
-gem 'ckeditor', :git => 'https://github.com/galetahub/ckeditor' 
 
 rake qwerty_engine:install:migrations
-rails generate ckeditor:install
 
 todo:
 rake qwerty_engine:install

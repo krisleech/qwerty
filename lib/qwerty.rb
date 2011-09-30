@@ -6,8 +6,6 @@ require "simple_form"
 require "jquery-rails"
 require "sanitize"
 require "dragonfly"
-require "ckeditor"
-require "paperclip"
 require "faker"
 
 # Qwerty
