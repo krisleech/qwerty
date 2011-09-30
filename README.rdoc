@@ -7,6 +7,7 @@ For now we also need to add an additional dependancy to your Gemfile, since Gem'
 gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'   
 
 rake qwerty_engine:install:migrations
+rake db:migrate
 rails g qwerty:install
 
 Developer Notes
