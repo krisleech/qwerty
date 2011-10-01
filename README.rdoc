@@ -4,7 +4,7 @@ gem 'qwerty'
 
 For now we also need to add an additional dependancy to your Gemfile, since Gem's can not depend on git repositories only released versions
 
-gem 'simple_form', :git => 'https://github.com/plataformatec/simple_form.git'   
+gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'   
 
 rake qwerty_engine:install:migrations
 rake db:migrate
