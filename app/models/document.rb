@@ -29,6 +29,10 @@ class Document < ActiveRecord::Base
     !image.nil?
   end
 
+  def can_have_children?
+    !node.children.empty?
+  end
+
   private
 
   def set_summary

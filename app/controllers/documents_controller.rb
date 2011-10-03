@@ -9,15 +9,29 @@ class DocumentsController < QwertyBaseController
   def show
     path = request.path == '/' ? '/home' : request.path
     @document = Document.public.find_by_permalink!(path)
+    prepare_view_environment
     render locate_template(@document) 
   end
 
   private
+  
+  def prepare_view_environment
+    # e.g @blog
+    instance_variable_set("@#{@document.node_name}", @document)
+    # e.g @posts
+    if @document.can_have_children?
+      @document.node.children.each do | node |
+        instance_variable_set("@#{node.name.pluralize}", node.documents.public)
+      end
+    end
+  end
 
   # TODO: move this in a class in lib, path_prefix should be setable in
   # Qwerty.options
   # Use Pathname class:
   # http://ruby-doc.org/stdlib/libdoc/pathname/rdoc/index.html
+  # Or ViewResolver
+  # http://jkfill.com/2011/03/11/implementing-a-rails-3-view-resolver/
   
   def locate_template(document)
     view_prefix = 'cms'
