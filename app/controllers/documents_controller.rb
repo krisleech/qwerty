@@ -21,7 +21,7 @@ class DocumentsController < QwertyBaseController
     # e.g @posts
     if @document.can_have_children?
       @document.node.children.each do | node |
-        instance_variable_set("@#{node.name.pluralize}", node.documents.public.order('published_at asc').page(page_param(@document)).per(node.get(:per_page) || 10))
+        instance_variable_set("@#{node.name.pluralize}", node.documents.public.order(node.get(:sort) || 'published_at desc').page(page_param(@document)).per(node.get(:per_page) || 10))
       end
     end
   end

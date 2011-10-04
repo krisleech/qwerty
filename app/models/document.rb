@@ -11,7 +11,7 @@ class Document < ActiveRecord::Base
 
   image_accessor :image
 
-  default_scope :order => 'position ASC'
+  # default_scope :order => 'position ASC'
   
   scope :by_node, lambda { |node| where(:node_id => node.id) }
   scope :public, where(:published => true)
