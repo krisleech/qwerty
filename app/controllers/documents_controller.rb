@@ -21,9 +21,13 @@ class DocumentsController < QwertyBaseController
     # e.g @posts
     if @document.can_have_children?
       @document.node.children.each do | node |
-        instance_variable_set("@#{node.name.pluralize}", node.documents.public)
+        instance_variable_set("@#{node.name.pluralize}", node.documents.public.order('published_at asc').page(page_param(@document)).per(node.get(:per_page) || 10))
       end
     end
+  end
+
+  def page_param(document)
+    params[document.node_name + '_page']
   end
 
   # TODO: move this in a class in lib, path_prefix should be setable in

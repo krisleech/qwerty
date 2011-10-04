@@ -19,7 +19,7 @@ class Document < ActiveRecord::Base
   before_save :set_summary, :set_meta_fields
   before_validation :set_published_at, :set_permalink
 
-  delegate :get, :to => :node
+  delegate :get, :set, :to => :node
 
   def node_name
     node.name

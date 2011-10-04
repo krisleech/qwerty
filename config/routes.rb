@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   end
 
 
-  match '*permalink' => 'documents#show'
+  match '*permalink' => 'documents#show', :as => :document
 end
