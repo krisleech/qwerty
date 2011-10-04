@@ -20,9 +20,9 @@
   <div class='node'>
     <h3><%= node.name.pluralize.capitalize %></h3>
 
-    <% unless @document.leaf? %>
+    <% unless node.documents.empty? %>
       <div class="documents">
-        <%= render :partial => @document.children.by_node(node) %>
+        <%= render :partial => node.documents.order(node.get(:sort) || 'update_at desc') %>
       </div>
     <% else %>
       <p>No <%= node.name.capitalize.pluralize %> have been added yet.</p>
