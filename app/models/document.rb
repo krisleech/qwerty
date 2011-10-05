@@ -17,7 +17,8 @@ class Document < ActiveRecord::Base
   scope :public, where(:published => true)
 
   before_save :set_summary, :set_meta_fields
-  before_validation :set_published_at, :set_permalink
+  before_validation :set_published_at
+  before_validation :set_permalink, :on => :create
 
   delegate :get, :to => :node
 
