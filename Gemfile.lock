@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/ivanyv/kaminari.git
+  revision: 8e5857c9abec48110b8d72a6221dea42bb4e3c49
+  specs:
+    kaminari (0.12.4)
+      rails (>= 3.0.0)
+
+GIT
   remote: git://github.com/plataformatec/simple_form.git
   revision: 5ea7d400146eb217b28fb5b0682c6ce27bf64c8c
   specs:
@@ -126,6 +133,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  kaminari!
   mysql2
   qwerty!
   rails (~> 3.0)

@@ -11,6 +11,7 @@ gemspec
 # your gem to rubygems.org.
 
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
+gem 'kaminari', :git => 'git://github.com/ivanyv/kaminari.git'
 
 # To use debugger
 # gem 'ruby-debug'

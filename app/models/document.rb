@@ -11,7 +11,7 @@ class Document < ActiveRecord::Base
 
   image_accessor :image
 
-  default_scope :order => 'position ASC'
+  # default_scope :order => 'position ASC'
   
   scope :by_node, lambda { |node| where(:node_id => node.id) }
   scope :public, where(:published => true)
@@ -20,7 +20,7 @@ class Document < ActiveRecord::Base
   before_validation :set_published_at
   before_validation :set_permalink, :on => :create
 
-  delegate :get, :to => :node
+  delegate :get, :set, :to => :node
 
   def node_name
     node.name
