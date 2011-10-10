@@ -37,6 +37,11 @@ module Qwerty
     #
     # * layout: The layout to use for Qwerty's public facing controllers, set
     # to nil to use the Rails default layout
+    #
+    # * admin_route_namespace: The namespace for the admin controllers, you may
+    # wish to change this to '/admin' if you have other controllers in this
+    # namespace and you want consistant URL's. Note: if you change this your
+    # views will still reside in 'views/qwerty_admin'.
     
     def options
       @options ||= {
@@ -44,7 +49,8 @@ module Qwerty
         :autherization => nil,
         :admin_autherization => nil,
         :admin_layout => nil,
-        :layout => nil
+        :layout => nil,
+        :admin_route_namespace => '/qwerty_admin'
       }
     end
 
