@@ -1,10 +1,9 @@
-<% document = config[:document] %>
+<% node = config[:node] -%>
+<h2><%%= @<%= node.name %>.title %></h2>
 
-<h2><%%= @<%= document.node_name %>.title %></h2>
+<div class='body'><%%= @<%= node.name %>.body.html_safe %></div>
 
-<div class='body'><%%= @<%= document.node_name %>.body.html_safe %></div>
-
-<% document.node.children.each do | node | %>
+<% node.children.each do | node | %>
 
   <div id="<%= node.name.pluralize %>">
     <%% @<%= node.name.pluralize %>.each do | <%= node.name %> | %>

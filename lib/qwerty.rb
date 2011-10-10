@@ -13,8 +13,6 @@ require "qwerty/engine"
 require "qwerty/allow_auth"
 require "qwerty/deny_auth"
 require "qwerty/lipsum"
-require 'rails/generators'
-require File.expand_path('generators/qwerty/view_generator/view_generator.rb', File.dirname(__FILE__))
 
 module Qwerty
   class << self
