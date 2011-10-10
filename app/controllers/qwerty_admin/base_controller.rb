@@ -4,5 +4,5 @@ class QwertyAdmin::BaseController < InheritedResources::Base
 
   before_filter :autherize
 
-  layout 'qwerty_admin'
+  layout Qwerty.options[:admin_layout] unless Qwerty.options[:admin_layout].nil?
 end

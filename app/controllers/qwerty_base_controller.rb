@@ -3,4 +3,6 @@ class QwertyBaseController < ApplicationController
   include Qwerty.options[:autherization]
 
   before_filter :autherize
+  
+  layout Qwerty.options[:layout] unless Qwerty.options[:layout].nil?
 end
