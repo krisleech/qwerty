@@ -48,7 +48,7 @@ module Qwerty
         :admin_title => 'Qwerty CMS',
         :autherization => nil,
         :admin_autherization => nil,
-        :admin_layout => nil,
+        :admin_layout => 'qwerty_admin',
         :layout => nil,
         :admin_route_namespace => '/qwerty_admin'
       }
