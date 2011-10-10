@@ -21,13 +21,16 @@ module Qwerty
     #
     # * admin_title: The title shown in the admin UI
     #
-    # * admin_authentication: Module which is mixed in to Qwerty admin 
+    # * admin_autherization: Module which is mixed in to Qwerty admin 
     # controllers, it must have a method called 'autherize', which is called 
-    # from a before_filter
+    # from a before_filter. Set to nil to turn autherization off.
     #
-    # * authentication: Module which is mixed in to public facing Qwerty, works
-    # in the same way as admin_authentication. Usually this will not need 
-    # changing as you will allow unrestricted access to your CMS pages.
+    # * autherization: Module which is mixed in to public facing Qwerty, works
+    # in the same way as admin_authentication. Usually this will be left as nil
+    # to allow anybody access to CMS pages.
+    #
+    # Note: All Qwerty controllers inherit from ApplicationController, so your
+    # autherize method will have access to its private methods e.g current_user.
     #
     # * admin_layout: The layout to use for all Qwerty's admin controllers,
     # set o nil to use Rails default layout
@@ -38,8 +41,8 @@ module Qwerty
     def options
       @options ||= {
         :admin_title => 'Qwerty CMS',
-        :autherization => Qwerty::AllowAuth,
-        :admin_autherization => Qwerty::AllowAuth,
+        :autherization => nil,
+        :admin_autherization => nil,
         :admin_layout => nil,
         :layout => nil
       }
