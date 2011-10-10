@@ -5,14 +5,14 @@ Sitemap.build do | root |
     home.undeleteable!
 
     home.add(:banner) do | banner |
-      banner.set(:sort => 'title asc')
+      banner.set(:sort => 'position asc')
       banner.set(:pagination => :off)
       banner.fields(:only => %w(title url image))
       banner.fieldsets(:except => %w(meta advanced))
     end
 
     home.add(:link) do | link |
-      link.set(:sort => 'title asc')
+      link.set(:sort => 'position asc')
       link.fields(:only => %w(title url image))
       link.fieldsets(:except => %w(meta advanced))
       link.pagination_off!

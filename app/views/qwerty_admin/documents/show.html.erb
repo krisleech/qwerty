@@ -22,11 +22,15 @@
 
     <% unless node.documents.empty? %>
       <div class="documents">
-        <%= render :partial => node.documents.order(node.get(:sort) || 'update_at desc') %>
+        <% documents = node.documents.order(node.get(:sort) || 'published_at desc').page(params["#{node.name}_page".to_sym]).per(10 / @document.node.children.size) %>
+        <%= render :partial => documents %>
       </div>
     <% else %>
       <p>No <%= node.name.capitalize.pluralize %> have been added yet.</p>
     <% end %>
+
+    <%= paginate documents, :route => :qwerty_admin_document_path, :param_name => "#{node.name}_page" %>
+
     <p>
     <%= link_to "Add #{node.name.capitalize}", new_qwerty_admin_document_path(:parent_id => @document.id, :node_id => node.id), :class => 'btn primary' %>
     </p>

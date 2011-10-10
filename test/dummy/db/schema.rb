@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20110922185424) do
     t.integer  "lft"
     t.integer  "rgt"
     t.integer  "depth",            :default => 0
-    t.integer  "position",         :default => 0
+    t.integer  "position",         :default => 1
     t.integer  "node_id"
     t.datetime "created_at"
     t.datetime "updated_at"
