@@ -1,0 +1,22 @@
+<% node = config[:node] -%>
+<h2><%%= @<%= node.name %>.title %></h2>
+
+<div class='body'><%%= @<%= node.name %>.body.html_safe %></div>
+
+<% node.children.each do | node | %>
+
+  <div id="<%= node.name.pluralize %>">
+    <%% @<%= node.name.pluralize %>.each do | <%= node.name %> | %>
+      <div class='<%= node.name %>'>
+        <h3><%%= link_to <%= node.name %>.title, document_path(<%= node.name %>) %></h3>
+
+        <div><%%= <%= node.name %>.summary %></div>
+        <div><%%= <%= node.name %>.published_at %></div>
+      </div>
+    <%% end %>
+
+    <%% end %>
+
+    <%%= paginate @<%= node.name.pluralize %>, :route => :document_path, :param_name => "#{@<%= node.name.pluralize %>.node_name}_page" %>
+  </div>
+<% end %>
