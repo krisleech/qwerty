@@ -21,6 +21,7 @@ class DocumentsController < QwertyBaseController
     # e.g @posts
     if @document.can_have_children?
       @document.node.children.each do | node |
+        logger.warn("[Qwerty] Both parent and child have the same node name, so @#{@document.node_name} is overwriting @#{node.name.pluralize}, use @document instead to access the parent document") if node.name.pluralize == @document.node_name
         instance_variable_set("@#{node.name.pluralize}", node.documents.public.order(node.get(:sort) || 'published_at desc').page(page_param(@document)).per(node.get(:per_page) || 10))
       end
     end

@@ -1,7 +1,9 @@
-<% node = config[:node] -%>
-<h2><%%= @<%= node.name %>.title %></h2>
+<% node = config[:node] 
+parent_var = '@' + (node.children.any? { |n| n.name.pluralize == node.name } ? 'document' : node.name)
+-%>
+<h2><%%= <%= parent_var %>.title %></h2>
 
-<div class='body'><%%= @<%= node.name %>.body.html_safe %></div>
+<div class='body'><%%= <%= parent_var %>.body.html_safe %></div>
 
 <% node.children.each do | node | %>
 

@@ -4,7 +4,6 @@ class Qwerty::CreateDocumentViewsGenerator < Rails::Generators::Base
 
     def generate_views(node = Sitemap.root)
       node.children.each do | node |
-        puts node.ancestry
         generate_view(node)
         generate_views(node) unless node.leaf?
       end
