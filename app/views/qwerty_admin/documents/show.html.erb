@@ -29,7 +29,7 @@
       <p>No <%= node.name.capitalize.pluralize %> have been added yet.</p>
     <% end %>
 
-    <%= paginate documents, :route => :qwerty_admin_document_path, :param_name => "#{node.name}_page" %>
+    <%= paginate documents, :route => :qwerty_admin_document_path, :param_name => "#{node.name}_page", :theme => :twitter %>
 
     <p>
     <%= link_to "Add #{node.name.capitalize}", new_qwerty_admin_document_path(:parent_id => @document.id, :node_id => node.id), :class => 'btn primary' %>

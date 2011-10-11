@@ -7,4 +7,4 @@
   <div><%= post.published_at %></div>
 <% end %>
 
-<%= paginate @posts, :route => :document_path, :param_name => "#{@blog.node_name}_page" %>
+<%= paginate @posts, :route => :document_path, :param_name => "#{@blog.node_name}_page", :theme => :twitter %>

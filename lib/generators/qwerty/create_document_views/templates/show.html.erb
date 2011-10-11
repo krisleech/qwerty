@@ -17,6 +17,6 @@
 
     <%% end %>
 
-    <%%= paginate @<%= node.name.pluralize %>, :route => :document_path, :param_name => "#{@<%= node.name.pluralize %>.node_name}_page" %>
+    <%%= paginate @<%= node.name.pluralize %>, :route => :document_path, :param_name => "#{@<%= node.name.pluralize %>.node_name}_page", :theme => :twitter %>
   </div>
 <% end %>
