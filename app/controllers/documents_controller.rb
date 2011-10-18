@@ -53,12 +53,8 @@ class DocumentsController < QwertyBaseController
       'show']
       paths.uniq.each do | path |
       view_paths.each do | view_path |
-      unless view_path.is_a?(String)
-        logger.debug 'view_path not a string: ' + view_path.inspect
-        next
-      end
         rel_path = File.join(view_prefix, path) + '.html.erb'
-        full_path = File.join(view_path, rel_path)
+        full_path = File.join(view_path.to_s, rel_path)
         if File.exists? full_path
           logger.debug "Found: #{full_path}"
           return rel_path
