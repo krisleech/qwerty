@@ -20,13 +20,17 @@
   <div class='node'>
     <h3><%= node.name.pluralize.capitalize %></h3>
 
-    <% unless @document.leaf? %>
+    <% unless node.documents.empty? %>
       <div class="documents">
-        <%= render :partial => @document.children.by_node(node) %>
+        <% documents = node.documents.order(node.get(:sort) || 'published_at desc').page(params["#{node.name}_page".to_sym]).per(10 / @document.node.children.size) %>
+        <%= render :partial => documents %>
       </div>
     <% else %>
       <p>No <%= node.name.capitalize.pluralize %> have been added yet.</p>
     <% end %>
+
+    <%= paginate documents, :route => :qwerty_admin_document_path, :param_name => "#{node.name}_page", :theme => :twitter %>
+
     <p>
     <%= link_to "Add #{node.name.capitalize}", new_qwerty_admin_document_path(:parent_id => @document.id, :node_id => node.id), :class => 'btn primary' %>
     </p>

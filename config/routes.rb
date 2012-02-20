@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root :to => 'documents#show'
 
-  namespace :qwerty_admin do
+  scope Qwerty.options[:admin_route_namespace], :module => :qwerty_admin, :as => :qwerty_admin do
     root :to => 'documents#index'
 
     resources :nodes do
@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   end
 
 
-  match '*permalink' => 'documents#show'
+  match '*permalink' => 'documents#show', :as => :document
 end

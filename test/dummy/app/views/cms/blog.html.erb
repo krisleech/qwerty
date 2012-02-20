@@ -1,0 +1,10 @@
+<h2><%= @blog.title %></h2>
+
+<% @posts.each do | post | %>
+  <h3><%= link_to post.title, document_path(post) %></h3>
+
+  <div><%= post.summary %></div>
+  <div><%= post.published_at %></div>
+<% end %>
+
+<%= paginate @posts, :route => :document_path, :param_name => "#{@blog.node_name}_page", :theme => :twitter %>

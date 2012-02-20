@@ -1,8 +1,9 @@
 class QwertyAdmin::BaseController < InheritedResources::Base
-  # Module which has a method called 'autherize', this is called from a before_filter below
-  include Qwerty.options[:admin_autherization]
 
-  before_filter :autherize
+  unless Qwerty.options[:admin_autherization].nil? 
+    include Qwerty.options[:admin_autherization]
+    before_filter :autherize
+  end
 
-  layout 'qwerty_admin'
+  layout Qwerty.options[:admin_layout] unless Qwerty.options[:admin_layout].nil?
 end

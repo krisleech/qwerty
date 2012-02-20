@@ -1,8 +1,8 @@
 <li class='node'><%= (node.leaf? ? node.name.pluralize : node.name).capitalize %>
 <span>
   <%= link_to 'Add', new_qwerty_admin_node_path(:parent_id => node.id) %>
-  <%= link_to 'Up', up_qwerty_admin_node_path(node) %>
-  <%= link_to 'Down', down_qwerty_admin_node_path(node) %>
+  <%= link_to 'Up', up_qwerty_admin_node_path(node) unless node.last? %>
+  <%= link_to 'Down', down_qwerty_admin_node_path(node) unless node.first? %>
   <%= link_to 'Edit', edit_qwerty_admin_node_path(node) %>
   <%= link_to 'Delete', qwerty_admin_node_path(node), :method => :delete, :confirm => 'Are you sure?' %>
   <%= node.position %>

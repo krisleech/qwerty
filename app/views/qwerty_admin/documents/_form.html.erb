@@ -6,7 +6,7 @@
 <div class='inputs'>
   <fieldset>
     <%= form.input :title if fields.include?('title') %>
-    <%= form.input :body, :as => :ckeditor , :input_html => { :cols => 5 } if fields.include?('body') %>
+    <%= form.input :body, :hint => 'HTML allowed', :input_html => { :rows => 9, :class => 'span14' } if fields.include?('body')%>
     <%= form.input :summary, :hint => 'Plain text only, automatically set if left blank', :input_html => { :rows => 5, :class => 'span14'} if fields.include?('summary') %>
     <%= form.input :url, :as => :url if fields.include?('url') %>
     <%= form.input :published if fields.include?('published') %>

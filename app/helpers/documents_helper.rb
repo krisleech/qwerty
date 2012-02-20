@@ -6,6 +6,6 @@ module DocumentsHelper
   end
 
   def document_path(document)
-    document.permalink
+    document.is_a?(Document) ? document.permalink : super(document)
   end
 end

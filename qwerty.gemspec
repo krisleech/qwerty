@@ -16,7 +16,6 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 3.0"
   s.add_dependency "nested_set"
   s.add_dependency "acts_as_list"
   s.add_dependency "inherited_resources"
@@ -24,10 +23,10 @@ Gem::Specification.new do |s|
   s.add_dependency "jquery-rails"
   s.add_dependency "sanitize"
   s.add_dependency "dragonfly"
-  s.add_dependency "ckeditor"
-  s.add_dependency "paperclip"
   s.add_dependency "faker"
+  # s.add_dependency "kaminari"
   
+  s.add_development_dependency "rails", "~> 3.0"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "mysql2"
 end

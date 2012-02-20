@@ -1,0 +1,30 @@
+===============================================================================
+                                             _         
+                                            | |        
+                      __ ___      _____ _ __| |_ _   _ 
+                     / _` \ \ /\ / / _ \ '__| __| | | |
+                    | (_| |\ V  V /  __/ |  | |_| |_| |
+                     \__, | \_/\_/ \___|_|   \__|\__, |
+                        | |                       __/ |
+                        |_|                      |___/ 
+
+
+1. Construct your sitemap
+
+config/sitemap.rb 
+
+2. Load your sitemap and some Lipsum content
+
+rake bootstrap
+
+3. Start the server
+
+rails s
+
+4. Open your browser
+
+visit localhost:3000
+
+5. Enjoy !
+
+===============================================================================

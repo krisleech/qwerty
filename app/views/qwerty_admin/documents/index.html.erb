@@ -1,5 +1,6 @@
 <h2>Sitemap</h2>
 
+
 <div id="documents">
   <% @documents.each do | document | %>
 
@@ -16,13 +17,12 @@
         </div>
 
         <div class="span4 offset2">
-          <%= link_to image_tag('qwerty/admin/icons/up.png'), up_qwerty_admin_document_path(document), :class => 'btn small' unless document.last? %>
-          <%= link_to image_tag('qwerty/admin/icons/down.png'), down_qwerty_admin_document_path(document), :class => 'btn small' unless document.first? %>
+          <%= link_to image_tag('qwerty/admin/icons/up.png'), up_qwerty_admin_document_path(document), :class => 'btn small' unless document.first? %>
+          <%= link_to image_tag('qwerty/admin/icons/down.png'), down_qwerty_admin_document_path(document), :class => 'btn small' unless document.last? %>
           <%= link_to 'Edit', edit_qwerty_admin_document_path(document), :class => 'btn small' %>
           <%= link_to 'Live', document_path(document), :target => '_blank', :class => 'btn small' %>
         </div>
       </div>
-
 
       <p>
       <% document.node.children.each do | node | %>

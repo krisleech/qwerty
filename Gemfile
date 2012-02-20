@@ -10,20 +10,12 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'rails'
-gem 'mysql2'
-gem 'nested_set'
-gem 'acts_as_list'
-gem 'inherited_resources'
-# gem 'formtastic'
 gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
-gem 'jquery-rails'
-gem 'faker'
-gem 'sanitize'
-gem 'dragonfly'
-gem 'rack-cache', :require => 'rack/cache'
-gem 'ckeditor'
-gem 'paperclip' # used by ckeditor
+gem 'kaminari', :git => 'git://github.com/ivanyv/kaminari.git'
 
 # To use debugger
 # gem 'ruby-debug'
+
+group :development do
+  # gem 'mysql2'
+end

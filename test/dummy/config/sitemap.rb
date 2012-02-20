@@ -5,14 +5,14 @@ Sitemap.build do | root |
     home.undeleteable!
 
     home.add(:banner) do | banner |
-      banner.set(:sort => :random)
+      banner.set(:sort => 'position asc')
       banner.set(:pagination => :off)
       banner.fields(:only => %w(title url image))
       banner.fieldsets(:except => %w(meta advanced))
     end
 
     home.add(:link) do | link |
-      link.set(:sort => 'title asc')
+      link.set(:sort => 'position asc')
       link.fields(:only => %w(title url image))
       link.fieldsets(:except => %w(meta advanced))
       link.pagination_off!
@@ -33,7 +33,7 @@ Sitemap.build do | root |
 
     blog.add(:post) do | post |
       post.set(:per_page => 10)
-      post.set(:sort => 'published_at asc')
+      post.set(:sort => 'published_at desc')
     end
   end
 
@@ -42,7 +42,7 @@ Sitemap.build do | root |
 
     gallery.add(:gallery) do | gallery |
       gallery.add(:picture) do | picture |
-        picture.set(:sort => 'published_at asc')
+        picture.set(:sort => 'published_at desc')
         picture.pagination_off!
       end
     end
