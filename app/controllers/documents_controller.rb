@@ -7,14 +7,14 @@ class DocumentsController < QwertyBaseController
   end
 
   def show
-    path = params[:permalink].present? ? '/' + params[:permalink] : request.path == '/' ? '/home' : request.path
+    path = permalink_path || home_path || request.path
     @document = Document.public.find_by_permalink!(path)
     prepare_view_environment
     render locate_template(@document) 
   end
 
   private
-  
+
   def prepare_view_environment
     # e.g @blog
     instance_variable_set("@#{@document.node_name}", @document)
@@ -65,5 +65,13 @@ class DocumentsController < QwertyBaseController
       logger.debug ''
     end
     raise NoTemplateFound
+  end
+
+  def permalink_path
+    params[:permalink].present? ? '/' + params[:permalink] : nil
+  end
+
+  def home_path
+    request.path == '/' ? '/home' : nil
   end
 end
