@@ -7,7 +7,7 @@ class DocumentsController < QwertyBaseController
   end
 
   def show
-    path = request.path == '/' ? '/home' : request.path
+    path = params[:permalink].present? ? '/' + params[:permalink] : request.path == '/' ? '/home' : request.path
     @document = Document.public.find_by_permalink!(path)
     prepare_view_environment
     render locate_template(@document) 
