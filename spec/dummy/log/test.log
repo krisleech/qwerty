@@ -1,0 +1,1036 @@
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+Creating scope :public. Overwriting existing method Document.public.
+Creating scope :public. Overwriting existing method Document.public.
+Creating scope :public. Overwriting existing method Document.public.
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.7ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("schema_migrations")[0m
+  [1m[35m (0.4ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36m (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+Migrating to CreateNodes (20110909144240)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "nodes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "parent_id" integer, "lft" integer, "rgt" integer, "position" integer DEFAULT 0, "depth" integer DEFAULT 0, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110909144240')
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to CreateDocuments (20110909144300)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "documents" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "permalink" varchar(255), "title" varchar(255), "body" text, "parent_id" integer, "lft" integer, "rgt" integer, "depth" integer DEFAULT 0, "position" integer DEFAULT 1, "node_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110909144300')
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateNodeSettings (20110909144805)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "node_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar(255), "value" varchar(255), "parent_id" integer, "lft" integer, "rgt" integer, "depth" integer DEFAULT 0, "node_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110909144805')
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to NodeSettingTypecasting (20110915174533)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "node_settings" ADD "value_klass" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110915174533')
+  [1m[36m (0.3ms)[0m  [1mcommit transaction[0m
+Migrating to NodeAncestry (20110915190140)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mALTER TABLE "nodes" ADD "ancestry" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110915190140')
+  [1m[36m (0.4ms)[0m  [1mcommit transaction[0m
+Migrating to DocumentExtraFields (20110919130646)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "documents" ADD "summary" text[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "documents" ADD "published" boolean DEFAULT 'f'
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "documents" ADD "url" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "documents" ADD "image_uid" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "documents" ADD "image_name" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110919130646')
+  [1m[36m (0.3ms)[0m  [1mcommit transaction[0m
+Migrating to DocumentMetaFields (20110919175405)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "documents" ADD "published_at" date[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "documents" ADD "meta_title" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "documents" ADD "meta_description" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "documents" ADD "meta_keywords" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110919175405')[0m
+  [1m[35m (0.3ms)[0m  commit transaction
+Migrating to DocumentImageAlt (20110922113655)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "documents" ADD "image_alt" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110922113655')[0m
+  [1m[35m (0.3ms)[0m  commit transaction
+Migrating to DocumentTemplate (20110922185424)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "documents" ADD "template" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20110922185424')[0m
+  [1m[35m (0.3ms)[0m  commit transaction
+  [1m[36m (0.5ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("documents")[0m
+  [1m[35m (0.0ms)[0m  PRAGMA index_list("node_settings")
+  [1m[36m (0.0ms)[0m  [1mPRAGMA index_list("nodes")[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.8ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:29:14 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:29:14 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (3.5ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:29:33 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:29:33 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.2ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (3.0ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:29:54 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:29:54 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:30:16 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:30:16 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (3.6ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:30:27 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:30:27 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.2ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (3.2ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:30:42 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:30:42 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:38:16 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:38:16 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:38:40 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:38:40 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.2ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sat, 10 Mar 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", nil], ["created_at", Sat, 10 Mar 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", nil], ["template", nil], ["title", "document title"], ["updated_at", Sat, 10 Mar 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-03-10', "meta_title" = 'document title' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  rollback transaction
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (3.6ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:40:12 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:40:12 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sun, 11 Mar 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 11 Mar 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", nil], ["created_at", Sun, 11 Mar 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", nil], ["template", nil], ["title", "document title"], ["updated_at", Sun, 11 Mar 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-03-11', "meta_title" = 'document title' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (3.3ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:42:53 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:42:53 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.2ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", nil], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", nil], ["template", nil], ["title", "document title"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-01-01', "meta_title" = 'document title' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.0ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node3' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node3' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node3"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node3"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", nil], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", "document title"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title"], ["position", 1], ["published", true], ["published_at", Sun, 01 Jan 2012], ["rgt", 2], ["summary", nil], ["template", nil], ["title", "document title"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title' AND "documents"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mUPDATE "documents" SET "title" = 'new title', "updated_at" = '2012-01-11 10:00:00.001412' WHERE "documents"."id" = 1[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.2ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:50:11 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:50:11 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_1"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 1"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_1' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-01-01', "meta_title" = 'Document title 1', "meta_description" = 'Document body' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.0ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node3' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node3' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node3"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node3"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_2' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 2"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_2"], ["position", 1], ["published", true], ["published_at", Sun, 01 Jan 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 2"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_2' AND "documents"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mUPDATE "documents" SET "title" = 'new title', "updated_at" = '2012-01-11 10:00:00.001306' WHERE "documents"."id" = 1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node4' LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node4' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node4"], ["created_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node4"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_3' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 3"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_3"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 3"], ["updated_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["url", nil]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node5' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node5' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node5"], ["created_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node5"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_4' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 4"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_4"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 4"], ["updated_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node6' LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node6' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node6"], ["created_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node6"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_5' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 5"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_5"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 5"], ["updated_at", Sat, 10 Mar 2012 10:50:12 UTC +00:00], ["url", nil]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.8ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_1"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 1"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_1' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-01-01', "meta_title" = 'Document title 1', "meta_description" = 'Document body' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.4ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.0ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node3' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node3' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node3"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node3"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_2' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 2"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_2"], ["position", 1], ["published", true], ["published_at", Sun, 01 Jan 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 2"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_2' AND "documents"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mUPDATE "documents" SET "title" = 'new title', "updated_at" = '2012-01-11 10:00:00.001226' WHERE "documents"."id" = 1[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node4' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node4' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node4"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node4"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_3' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 3"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_3"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 3"], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node5' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node5' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node5"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node5"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_4' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 4"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_4"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 4"], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node6' LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node6' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node6"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node6"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_5' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 5"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_5"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 5"], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node7' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node7' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node7"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node7"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/some_document_title' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "some document title"], ["node_id", 1], ["parent_id", nil], ["permalink", "/some_document_title"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "some document title"], ["updated_at", Sat, 10 Mar 2012 10:53:40 UTC +00:00], ["url", nil]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_1"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 1"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_1' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-01-01', "meta_title" = 'Document title 1', "meta_description" = 'Document body' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.0ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node3' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node3' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node3"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node3"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_2' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 2"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_2"], ["position", 1], ["published", true], ["published_at", Sun, 01 Jan 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 2"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_2' AND "documents"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mUPDATE "documents" SET "title" = 'new title', "updated_at" = '2012-01-11 10:00:00.001157' WHERE "documents"."id" = 1[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node4' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node4' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node4"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node4"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_3' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 3"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_3"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 3"], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["url", nil]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node5' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node5' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node5"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node5"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_4' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 4"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_4"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 4"], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node6' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node6' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node6"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node6"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_5' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 5"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_5"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 5"], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node7' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node7' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node7"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node7"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/some_document_title' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "some document title"], ["node_id", 1], ["parent_id", nil], ["permalink", "/some_document_title"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "some document title"], ["updated_at", Sat, 10 Mar 2012 10:53:56 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.2ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.2ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_1"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 1"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_1' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-01-01', "meta_title" = 'Document title 1', "meta_description" = 'Document body' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.0ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node3' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node3' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node3"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node3"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_2' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 2"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_2"], ["position", 1], ["published", true], ["published_at", Sun, 01 Jan 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 2"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_2' AND "documents"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mUPDATE "documents" SET "title" = 'new title', "updated_at" = '2012-01-11 10:00:00.001201' WHERE "documents"."id" = 1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node4' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node4' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node4"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node4"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_3' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 3"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_3"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 3"], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["url", nil]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node5' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node5' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node5"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node5"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_4' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 4"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_4"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 4"], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["url", nil]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.2ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node6' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node6' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node6"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node6"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.2ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_5' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 5"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_5"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 5"], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["url", nil]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node7' LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node7' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node7"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node7"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/some_document_title' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "some document title"], ["node_id", 1], ["parent_id", nil], ["permalink", "/some_document_title"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "some document title"], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["url", nil]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node8' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node8' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node8"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node8"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/parent_doc' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "parent doc"], ["node_id", 1], ["parent_id", nil], ["permalink", "/parent_doc"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "parent doc"], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node9' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node9' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node9"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["lft", 3], ["name", "Node9"], ["parent_id", nil], ["position", 2], ["rgt", 4], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" = 1 AND "documents"."node_id" = 2) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/parent_doc/some_document_title' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 3], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "some document title"], ["node_id", 2], ["parent_id", 1], ["permalink", "/parent_doc/some_document_title"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 4], ["summary", "Document body"], ["template", nil], ["title", "some document title"], ["updated_at", Sat, 10 Mar 2012 10:56:14 UTC +00:00], ["url", nil]]
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE "documents"."id" = ? ORDER BY "documents"."lft" LIMIT 1  [["id", 1]]
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mSQL (0.1ms)[0m  UPDATE "documents" SET "lft" = CASE WHEN "lft" BETWEEN 2 AND 2 THEN "lft" + 4 - 2 WHEN "lft" BETWEEN 3 AND 4 THEN "lft" + 2 - 3 ELSE "lft" END, "rgt" = CASE WHEN "rgt" BETWEEN 2 AND 2 THEN "rgt" + 4 - 2 WHEN "rgt" BETWEEN 3 AND 4 THEN "rgt" + 2 - 3 ELSE "rgt" END, "parent_id" = CASE WHEN id = 2 THEN 1 ELSE "parent_id" END WHERE "documents"."id" IN (SELECT "documents"."id" FROM "documents" ORDER BY "documents"."lft")
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "documents" WHERE ("documents"."lft" <= 2 AND "documents"."rgt" >= 3) AND ("documents"."id" != 2)[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "documents" SET "depth" = COALESCE("depth", 0) + 1 WHERE "documents"."id" IN (SELECT "documents"."id" FROM "documents" WHERE ("documents"."lft" >= 2 AND "documents"."rgt" <= 3) ORDER BY "documents"."lft")
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  rollback transaction
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (2.8ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:56:53 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:53 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_1"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 1"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_1' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-01-01', "meta_title" = 'Document title 1', "meta_description" = 'Document body' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.0ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node3' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node3' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node3"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node3"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_2' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 2"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_2"], ["position", 1], ["published", true], ["published_at", Sun, 01 Jan 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 2"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_2' AND "documents"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mUPDATE "documents" SET "title" = 'new title', "updated_at" = '2012-01-11 10:00:00.001469' WHERE "documents"."id" = 1[0m
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node4' LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node4' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node4"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node4"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_3' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 3"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_3"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 3"], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["url", nil]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node5' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node5' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node5"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node5"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_4' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 4"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_4"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 4"], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.2ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node6' LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node6' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node6"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node6"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_5' LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 5"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_5"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 5"], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["url", nil]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node7' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node7' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node7"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node7"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/some_document_title' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "some document title"], ["node_id", 1], ["parent_id", nil], ["permalink", "/some_document_title"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "some document title"], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node8' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node8' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node8"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node8"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/parent_doc' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "parent doc"], ["node_id", 1], ["parent_id", nil], ["permalink", "/parent_doc"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "parent doc"], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node9' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node9' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node9"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["lft", 3], ["name", "Node9"], ["parent_id", nil], ["position", 2], ["rgt", 4], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" = 1 AND "documents"."node_id" = 2) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/parent_doc/some_document_title' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 3], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "some document title"], ["node_id", 2], ["parent_id", 1], ["permalink", "/parent_doc/some_document_title"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 4], ["summary", "Document body"], ["template", nil], ["title", "some document title"], ["updated_at", Sat, 10 Mar 2012 10:56:54 UTC +00:00], ["url", nil]]
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE "documents"."id" = ? ORDER BY "documents"."lft" LIMIT 1  [["id", 1]]
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mSQL (0.1ms)[0m  UPDATE "documents" SET "lft" = CASE WHEN "lft" BETWEEN 2 AND 2 THEN "lft" + 4 - 2 WHEN "lft" BETWEEN 3 AND 4 THEN "lft" + 2 - 3 ELSE "lft" END, "rgt" = CASE WHEN "rgt" BETWEEN 2 AND 2 THEN "rgt" + 4 - 2 WHEN "rgt" BETWEEN 3 AND 4 THEN "rgt" + 2 - 3 ELSE "rgt" END, "parent_id" = CASE WHEN id = 2 THEN 1 ELSE "parent_id" END WHERE "documents"."id" IN (SELECT "documents"."id" FROM "documents" ORDER BY "documents"."lft")
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "documents" WHERE ("documents"."lft" <= 2 AND "documents"."rgt" >= 3) AND ("documents"."id" != 2)[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "documents" SET "depth" = COALESCE("depth", 0) + 1 WHERE "documents"."id" IN (SELECT "documents"."id" FROM "documents" WHERE ("documents"."lft" >= 2 AND "documents"."rgt" <= 3) ORDER BY "documents"."lft")
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+Creating scope :public. Overwriting existing method Document.public.
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node1' LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node1' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (3.2ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node1"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node1"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.2ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '' LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.0ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node2' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node2' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node2"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node2"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_1' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", nil], ["meta_keywords", nil], ["meta_title", nil], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_1"], ["position", 1], ["published", false], ["published_at", nil], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 1"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_1' AND "documents"."id" != 1) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  UPDATE "documents" SET "published" = 't', "published_at" = '2012-01-01', "meta_title" = 'Document title 1', "meta_description" = 'Document body' WHERE "documents"."id" = 1
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.0ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node3' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node3' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node3"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node3"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_2' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.0ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 2"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_2"], ["position", 1], ["published", true], ["published_at", Sun, 01 Jan 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 2"], ["updated_at", Sun, 01 Jan 2012 10:00:00 UTC +00:00], ["url", nil]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Exists (0.1ms)[0m  SELECT 1 FROM "documents" WHERE ("documents"."permalink" = '/document_title_2' AND "documents"."id" != 1) LIMIT 1
+  [1m[36m (0.1ms)[0m  [1mUPDATE "documents" SET "title" = 'new title', "updated_at" = '2012-01-11 10:00:00.001235' WHERE "documents"."id" = 1[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node4' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node4' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node4"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node4"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_3' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 3"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_3"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 3"], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node5' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node5' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node5"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node5"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_4' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "Document title 4"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_4"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "Document title 4"], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["url", nil]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node6' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node6' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node6"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node6"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/document_title_5' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "some document body here"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "some document body here"], ["meta_keywords", nil], ["meta_title", "Document title 5"], ["node_id", 1], ["parent_id", nil], ["permalink", "/document_title_5"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "some document body here"], ["template", nil], ["title", "Document title 5"], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.2ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.1ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node7' LIMIT 1
+  [1m[36mNode Exists (0.1ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node7' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node7"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node7"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/some_document_title' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "some document title"], ["node_id", 1], ["parent_id", nil], ["permalink", "/some_document_title"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "some document title"], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["url", nil]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mNode Load (0.1ms)[0m  SELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node8' LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node8' AND "nodes"."parent_id" IS NULL) LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("nodes"."rgt") AS max_id FROM "nodes" [0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)  [["ancestry", "/Node8"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["lft", 1], ["name", "Node8"], ["parent_id", nil], ["position", 1], ["rgt", 2], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" IS NULL AND "documents"."node_id" = 1) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mDocument Exists (0.0ms)[0m  SELECT 1 FROM "documents" WHERE "documents"."permalink" = '/parent_doc' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mSELECT MAX("documents"."rgt") AS max_id FROM "documents" [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 1], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "parent doc"], ["node_id", 1], ["parent_id", nil], ["permalink", "/parent_doc"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 2], ["summary", "Document body"], ["template", nil], ["title", "parent doc"], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["url", nil]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mNode Load (0.1ms)[0m  [1mSELECT "nodes".* FROM "nodes" WHERE ("nodes"."parent_id" IS NULL) ORDER BY position DESC LIMIT 1[0m
+  [1m[35mNode Exists (0.0ms)[0m  SELECT 1 FROM "nodes" WHERE "nodes"."ancestry" = '/Node9' LIMIT 1
+  [1m[36mNode Exists (0.0ms)[0m  [1mSELECT 1 FROM "nodes" WHERE ("nodes"."name" = 'Node9' AND "nodes"."parent_id" IS NULL) LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  SELECT MAX("nodes"."rgt") AS max_id FROM "nodes" 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "nodes" ("ancestry", "created_at", "depth", "lft", "name", "parent_id", "position", "rgt", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["ancestry", "/Node9"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["lft", 3], ["name", "Node9"], ["parent_id", nil], ["position", 2], ["rgt", 4], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mDocument Load (0.1ms)[0m  SELECT "documents".* FROM "documents" WHERE ("documents"."parent_id" = 1 AND "documents"."node_id" = 2) ORDER BY position DESC LIMIT 1
+  [1m[36mDocument Exists (0.0ms)[0m  [1mSELECT 1 FROM "documents" WHERE "documents"."permalink" = '/parent_doc/some_document_title' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  SELECT MAX("documents"."rgt") AS max_id FROM "documents" 
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "documents" ("body", "created_at", "depth", "image_alt", "image_name", "image_uid", "lft", "meta_description", "meta_keywords", "meta_title", "node_id", "parent_id", "permalink", "position", "published", "published_at", "rgt", "summary", "template", "title", "updated_at", "url") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["body", "Document body"], ["created_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["depth", 0], ["image_alt", nil], ["image_name", nil], ["image_uid", nil], ["lft", 3], ["meta_description", "Document body"], ["meta_keywords", nil], ["meta_title", "some document title"], ["node_id", 2], ["parent_id", 1], ["permalink", "/parent_doc/some_document_title"], ["position", 1], ["published", true], ["published_at", Sat, 10 Mar 2012], ["rgt", 4], ["summary", "Document body"], ["template", nil], ["title", "some document title"], ["updated_at", Sat, 10 Mar 2012 10:57:17 UTC +00:00], ["url", nil]]
+  [1m[35mDocument Load (0.2ms)[0m  SELECT "documents".* FROM "documents" WHERE "documents"."id" = ? ORDER BY "documents"."lft" LIMIT 1  [["id", 1]]
+  [1m[36mDocument Load (0.1ms)[0m  [1mSELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1[0m  [["id", 2]]
+  [1m[35mSQL (0.1ms)[0m  UPDATE "documents" SET "lft" = CASE WHEN "lft" BETWEEN 2 AND 2 THEN "lft" + 4 - 2 WHEN "lft" BETWEEN 3 AND 4 THEN "lft" + 2 - 3 ELSE "lft" END, "rgt" = CASE WHEN "rgt" BETWEEN 2 AND 2 THEN "rgt" + 4 - 2 WHEN "rgt" BETWEEN 3 AND 4 THEN "rgt" + 2 - 3 ELSE "rgt" END, "parent_id" = CASE WHEN id = 2 THEN 1 ELSE "parent_id" END WHERE "documents"."id" IN (SELECT "documents"."id" FROM "documents" ORDER BY "documents"."lft")
+  [1m[36mDocument Load (0.0ms)[0m  [1mSELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1[0m  [["id", 1]]
+  [1m[35mDocument Load (0.0ms)[0m  SELECT "lft", "rgt", "parent_id" FROM "documents" WHERE "documents"."id" = ? LIMIT 1  [["id", 2]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "documents" WHERE ("documents"."lft" <= 2 AND "documents"."rgt" >= 3) AND ("documents"."id" != 2)[0m
+  [1m[35mSQL (0.1ms)[0m  UPDATE "documents" SET "depth" = COALESCE("depth", 0) + 1 WHERE "documents"."id" IN (SELECT "documents"."id" FROM "documents" WHERE ("documents"."lft" >= 2 AND "documents"."rgt" <= 3) ORDER BY "documents"."lft")
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.3ms)[0m  rollback transaction
