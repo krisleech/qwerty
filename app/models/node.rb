@@ -14,6 +14,7 @@ class Node < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => :parent_id
 
   before_validation :set_ancestry
+  before_save :create_document
 
   accepts_nested_attributes_for :settings, :allow_destroy => true
 
@@ -62,10 +63,18 @@ class Node < ActiveRecord::Base
       child.each_child &block unless child.leaf?
     end
   end
+  
+  def root?
+    parent_id == nil
+  end
 
   private
 
   def set_ancestry
     self.ancestry = [self.parent.try(:ancestry), self.name].join('/') if new_record? || parent_id_changed? || name_changed?
+  end
+  
+  def create_document
+    self.documents.build(:title => self.name.capitalize) if self.parent && self.parent.root?
   end
 end

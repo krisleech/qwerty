@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(:version => 20110922185424) do
     t.integer  "depth",            :default => 0
     t.integer  "position",         :default => 1
     t.integer  "node_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.text     "summary"
     t.boolean  "published",        :default => false
     t.string   "url"
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(:version => 20110922185424) do
     t.integer  "rgt"
     t.integer  "depth",       :default => 0
     t.integer  "node_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
     t.string   "value_klass"
   end
 
@@ -58,8 +58,8 @@ ActiveRecord::Schema.define(:version => 20110922185424) do
     t.integer  "rgt"
     t.integer  "position",   :default => 0
     t.integer  "depth",      :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.string   "ancestry"
   end
 
