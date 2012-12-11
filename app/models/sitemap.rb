@@ -5,11 +5,11 @@ class Sitemap
       root.save!
     end
 
-    root.children.each do | node |
-     document = node.documents.new
-     document.title = node.name.capitalize
-     document.save!
-    end
+    # root.children.each do | node |
+    #  document = node.documents.new
+    #  document.title = node.name.capitalize
+    #  document.save!
+    # end
     root
   end
 

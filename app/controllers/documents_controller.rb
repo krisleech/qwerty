@@ -51,7 +51,7 @@ class DocumentsController < QwertyBaseController
       document.node.ancestry.gsub('/root', '').gsub('/', '.')[1..-1], 
       'default', 
       'show']
-      paths.uniq.each do | path |
+    paths.uniq.each do | path |
       view_paths.each do | view_path |
         rel_path = File.join(view_prefix, path) + '.html.erb'
         full_path = File.join(view_path.to_s, rel_path)
