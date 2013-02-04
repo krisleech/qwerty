@@ -19,14 +19,14 @@ Gem::Specification.new do |s|
   s.add_dependency "nested_set"
   s.add_dependency "acts_as_list"
   s.add_dependency "inherited_resources"
-  s.add_dependency "simple_form"
+  s.add_dependency "simple_form", '~> 2.0'
   s.add_dependency "jquery-rails"
   s.add_dependency "sanitize"
   s.add_dependency "dragonfly"
   s.add_dependency "faker"
-  # s.add_dependency "kaminari"
-  
-  s.add_development_dependency "rails", "~> 3.0"
+  s.add_dependency "kaminari", '0.13.0'
+
+  s.add_development_dependency "rails", "~> 3.1"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "mysql2"
 end
