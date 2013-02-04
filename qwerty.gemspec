@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "Content Management Toolkit"
   s.description = "The core functionality on which to build a fully featured Content Management System using Rails 3"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "nested_set"
